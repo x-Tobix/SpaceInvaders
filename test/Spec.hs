@@ -1,2 +1,6 @@
+import SpaceInvadersTests ( spaceInvadersTests )
+
 main :: IO ()
-main = putStrLn "Test suite not yet implemented"
+main = spaceInvadersTests
+
+
