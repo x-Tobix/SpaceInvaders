@@ -32,7 +32,6 @@ import Graphics.Gloss ()
 import Data.Bifunctor ( Bifunctor(first) )
 import GHC.Float ( int2Float )
 
-
 ----------BASE----------
 data AppState = Menu | Running | Lost
   deriving (Eq, Show)
@@ -108,7 +107,6 @@ actionHandler UnpushRight (Game Running spaceship invaders movs mis emis g c s p
 actionHandler UnpushLeft (Game Running spaceship invaders movs mis emis g c s p l) = Game Running spaceship invaders (removeItem PushLeft movs) mis emis g c s p l
 actionHandler Shoot (Game Running (Spaceship (x,y)) invaders movs mis emis g c s p l) = Game Running (Spaceship (x,y)) invaders movs (mis ++ [Missile (x,y + 40) 10 missileRadius]) emis g c s p l
 actionHandler Pause (Game Running spaceship invaders movs mis emis g c s p l) = Game Running spaceship invaders movs mis emis g c s (not p) l
-
 
 ----------GAME FUNCTIONS----------
 startLevel :: AppState -> Int -> Int -> (Float, Float) -> [GameAction] -> InvadersMissiles -> Game

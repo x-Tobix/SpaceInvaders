@@ -110,7 +110,6 @@ module GlossRenderer
           | score >= 1000 && score < 10000 = -60
           | otherwise = -80  
 
-
   renderBackground :: Picture -> Picture
   renderBackground bkgBmp = bkgBmp
 
