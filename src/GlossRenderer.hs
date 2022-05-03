@@ -39,8 +39,7 @@ module GlossRenderer
       Color,
       Picture(Text),
       rectangleWire,
-      MouseButton(LeftButton) )
-
+      MouseButton(LeftButton) )  
 
   data ObjectBitmaps = ObjectBitmaps
     { backgroundBmp :: Picture
@@ -96,7 +95,7 @@ module GlossRenderer
         renderLostMessage
           = scale
               0.4 0.4 (translate (-300) 450 (color white (Text "You Lost!")))
-        renderEndScore = renderScores (0, 0) (0.4, 0.4) (score game)
+        renderEndScore = renderScores (moveRenderScore $ score game, 0) (0.4, 0.4) (score game)
         renderRestartRec
           = color white (translate 0 (-100) (rectangleWire 800 50))
         renderRestartText
@@ -104,6 +103,12 @@ module GlossRenderer
               0.4 0.4
               (translate
                  (- 400) (-300) (color white (Text "Go to menu")))
+        moveRenderScore score
+          | score < 10 = 0
+          | score >= 10 && score < 100 = -20
+          | score >= 100 && score < 1000 = -40
+          | score >= 1000 && score < 10000 = -60
+          | otherwise = -80  
 
 
   renderBackground :: Picture -> Picture
