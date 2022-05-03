@@ -12,46 +12,62 @@ module SpaceInvaders
     , actionHandler
     , missileRadius
     , AppState(..)
+    , InvaderDirection(..)
+    , removeItem
+    , isEmpty
+    , Rectangle(..)
+    , Circle(..)
+    , recCircIntersect
+    , removeIf
+    , moveInvadersMissiles
+    , moveInvaders
+    , moveMissiles
+    , moveSpaceshipRight
+    , moveSpaceshipLeft
     ) where
 
 import System.Random ( uniformR, mkStdGen, StdGen )
 import Graphics.Gloss.Interface.IO.Game ()
 import Graphics.Gloss ()
 import Data.Bifunctor ( Bifunctor(first) )
-import GHC.Float
+import GHC.Float ( int2Float )
 
 
 ----------BASE----------
 data AppState = Menu | Running | Lost
-  deriving Eq
+  deriving (Eq, Show)
 
 type World = (Float, Float)
 
 ----------HELPERS----------
 data Rectangle = Rectangle World Float Float
+  deriving (Eq, Show)
 
 data Circle = Circle World Float
+  deriving (Eq, Show)
 
 ----------SPACE INVADERS GAME STATE----------
 data Missile = Missile
   { positionMis :: World
   , velocity :: Float
   , radius :: Float
-  } deriving Show
+  } deriving (Eq, Show)
 
 missileRadius :: Float
 missileRadius = 5
 
 newtype Spaceship = Spaceship World
+  deriving (Eq, Show)
 
 data InvaderDirection = LeftDir | RightDir
-  deriving Eq
+  deriving (Eq, Show)
 
 data Invader = Invader
   { positionInv :: World
   , startX :: Float
   , direction :: InvaderDirection
   }
+  deriving (Eq, Show)
 
 type Invaders = [Invader]
 
@@ -60,7 +76,7 @@ type Missiles = [Missile]
 type InvadersMissiles = [Missile]
 
 data GameAction = Quit | PushLeft | PushRight | UnpushLeft | UnpushRight | Shoot | Pause | Start | Restart
-  deriving Eq
+  deriving (Eq, Show)
 
 data Game = Game
   { appstate :: AppState
@@ -75,6 +91,7 @@ data Game = Game
   , pause :: Bool
   , level :: Int
   }
+  deriving (Eq, Show)
 
 ----------GAME ACTION HANDLERS----------
 actionHandler :: GameAction -> Game -> Game
